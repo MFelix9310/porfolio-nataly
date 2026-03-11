@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static core_filters %}
+
+{% block content %}
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="container hero__grid">
+        <div class="hero__content">
+            <p class="hero__eyebrow">Content Manager & Estrategia Digital</p>
+            <h1 class="hero__title">Nathaly<br><span class="hero__accent">Buenaño</span></h1>
+            <p class="hero__desc">Creo estrategias de contenido que conectan marcas con su audiencia. Gestiono redes sociales, campañas digitales y producción creativa con enfoque en resultados.</p>
+            <div class="hero__ctas">
+                <a href="#portfolio" class="btn btn--primary">Ver Portfolio</a>
+                <a href="#contacto" class="btn btn--outline">Hablemos</a>
+            </div>
+            <div class="hero__stats">
+                <div class="hero__stat">
+                    <span class="hero__stat-number">1+</span>
+                    <span class="hero__stat-label">Años de experiencia</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-number">3</span>
+                    <span class="hero__stat-label">Plataformas</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-number">100%</span>
+                    <span class="hero__stat-label">Remoto</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero__image-wrapper">
+            <div class="hero__image-border">
+                <img src="{% static 'img/nonno.jpeg' %}" alt="Nathaly Buenaño" class="hero__image" loading="lazy">
+            </div>
+            <div class="hero__badge">
+                <span>Content Manager ⭐</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section class="about section" id="sobre-mi">
+    <div class="container">
+        <h2 class="section__title fade-up">Sobre <span class="text-teal">mí</span></h2>
+        <div class="about__grid">
+            <div class="about__image-wrapper fade-up">
+                <img src="{% static 'img/dogo_about.png' %}" alt="Dogo Armani - Todo lo que tu mejor amigo peludo necesita" class="about__image" loading="lazy">
+            </div>
+            <div class="about__content fade-up">
+                <p>Soy <strong>Nathaly Buenaño</strong>, Content Manager y Coordinadora de Contenido desde Riobamba, Ecuador. Trabajo 100% remoto gestionando la presencia digital de marcas.</p>
+                <p>Actualmente dirijo toda la estrategia digital de <strong>Dogo Armani</strong>, un petshop donde me encargo del calendario editorial, diseño de contenido, campañas en Meta Ads, copywriting y análisis de métricas.</p>
+                <p>Mi enfoque combina <strong>creatividad con datos</strong>: cada pieza de contenido tiene un propósito estratégico y cada decisión está respaldada por métricas.</p>
+
+                {% if habilidades_por_categoria %}
+                <div class="about__skills">
+                    {% for categoria, lista in habilidades_por_categoria.items %}
+                    <div class="skill-group">
+                        <h4 class="skill-group__title">{{ categoria }}</h4>
+                        <div class="skill-group__chips">
+                            {% for hab in lista %}
+                            <span class="chip">{{ hab.nombre }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio section section--alt" id="portfolio">
+    <div class="container">
+        <h2 class="section__title fade-up">Mi <span class="text-teal">Portfolio</span></h2>
+        <p class="section__subtitle fade-up">Proyectos reales de estrategia digital y producción de contenido</p>
+
+        {% if proyectos %}
+        <div class="portfolio__grid">
+            {% for proyecto in proyectos %}
+            <a href="{% url 'core:proyecto_detalle' proyecto.slug %}" class="portfolio-card {% if proyecto.destacado %}portfolio-card--featured{% endif %} fade-up">
+                <div class="portfolio-card__image-wrapper">
+                    {% if proyecto.get_imagen_url|is_video %}
+                    <video src="{{ proyecto.get_imagen_url }}" class="portfolio-card__image" muted loop playsinline preload="metadata"></video>
+                    {% else %}
+                    <img src="{{ proyecto.get_imagen_url }}" alt="{{ proyecto.titulo }}" class="portfolio-card__image" loading="lazy">
+                    {% endif %}
+                    <span class="portfolio-card__category">{{ proyecto.categoria }}</span>
+                </div>
+                <div class="portfolio-card__content">
+                    <h3 class="portfolio-card__title">{{ proyecto.titulo }}</h3>
+                    <p class="portfolio-card__desc">{{ proyecto.descripcion|truncatewords:20 }}</p>
+                    <div class="portfolio-card__tags">
+                        {% for tag in proyecto.tags|split_tags %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="portfolio__empty fade-up">
+            <p>Próximamente se agregarán proyectos. ¡Vuelve pronto!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- REELS DE INSTAGRAM -->
+<section class="reels section" id="reels">
+    <div class="container">
+        <h2 class="section__title fade-up">Reels de <span class="text-teal">Instagram</span></h2>
+        <p class="section__subtitle fade-up">Contenido en video que conecta con la audiencia</p>
+
+        <div class="reels__grid">
+            {% for reel in reels %}
+            <div class="reel-card fade-up">
+                <a href="{% if reel.url_reel %}{{ reel.url_reel }}{% else %}{% url 'core:proyecto_detalle' reel.slug %}{% endif %}" {% if reel.url_reel %}target="_blank" rel="noopener"{% endif %} class="reel-card__link">
+                    <div class="reel-card__thumb">
+                        {% if reel.get_imagen_url|is_video %}
+                        <video src="{{ reel.get_imagen_url }}" class="reel-card__video" muted loop playsinline preload="metadata"></video>
+                        {% else %}
+                        <img src="{{ reel.get_imagen_url }}" alt="{{ reel.titulo }}" loading="lazy">
+                        {% endif %}
+                        <div class="reel-card__play">&#9654;</div>
+                    </div>
+                    <div class="reel-card__info">
+                        <span class="reel-card__client">{{ reel.cliente }}</span>
+                        <h4 class="reel-card__title">{{ reel.titulo }}</h4>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+            {% if not reels %}
+            <div class="reel-card fade-up">
+                <a href="https://www.instagram.com/dogoarmani/reels/" target="_blank" rel="noopener" class="reel-card__link">
+                    <div class="reel-card__thumb reel-card__thumb--placeholder">
+                        <div class="reel-card__play">&#9654;</div>
+                        <p>Ver Reels</p>
+                    </div>
+                    <div class="reel-card__info">
+                        <span class="reel-card__client">Dogo Armani</span>
+                        <h4 class="reel-card__title">Reels de Instagram</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="reel-card fade-up">
+                <a href="https://www.instagram.com/isabelruizarq/reels/" target="_blank" rel="noopener" class="reel-card__link">
+                    <div class="reel-card__thumb reel-card__thumb--placeholder">
+                        <div class="reel-card__play">&#9654;</div>
+                        <p>Ver Reels</p>
+                    </div>
+                    <div class="reel-card__info">
+                        <span class="reel-card__client">Isa Ruiz Arquitectura</span>
+                        <h4 class="reel-card__title">Reels de Instagram</h4>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="services section" id="servicios">
+    <div class="container">
+        <h2 class="section__title fade-up">Mis <span class="text-teal">Servicios</span></h2>
+        <p class="section__subtitle fade-up">Soluciones integrales de contenido y marketing digital</p>
+
+        <div class="services__grid">
+            {% for servicio in servicios %}
+            <div class="service-card fade-up">
+                <span class="service-card__icon">{{ servicio.icono }}</span>
+                <h3 class="service-card__title">{{ servicio.titulo }}</h3>
+                <p class="service-card__desc">{{ servicio.descripcion }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact section section--alt" id="contacto">
+    <div class="container">
+        <h2 class="section__title fade-up">¿Trabajamos <span class="text-teal">juntos</span>?</h2>
+        <p class="section__subtitle fade-up">Estoy disponible para proyectos remotos. ¡Escríbeme!</p>
+
+        <div class="contact__grid">
+            <div class="contact__info fade-up">
+                <div class="contact__item">
+                    <span class="contact__icon">📧</span>
+                    <div>
+                        <h4>Email</h4>
+                        <a href="mailto:nathalybuenano@gmail.com">nathalybuenano@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact__item">
+                    <span class="contact__icon">📸</span>
+                    <div>
+                        <h4>Instagram</h4>
+                        <a href="https://instagram.com/dogoarmani" target="_blank" rel="noopener">@dogoarmani</a>
+                    </div>
+                </div>
+                <div class="contact__item">
+                    <span class="contact__icon">📍</span>
+                    <div>
+                        <h4>Ubicación</h4>
+                        <p>Riobamba, Ecuador — 100% Remoto</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact__form fade-up" id="contactForm" method="post" action="{% url 'core:contacto' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="nombre" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="empresa" placeholder="Tu empresa (opcional)">
+                </div>
+                <div class="form-group">
+                    <textarea name="mensaje" placeholder="¿En qué puedo ayudarte?" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Enviar mensaje</button>
+                <p class="contact__success" id="contactSuccess" style="display:none;">¡Gracias! Te respondo en menos de 24 horas.</p>
+                <p class="contact__error" id="contactError" style="display:none;"></p>
+            </form>
+        </div>
+
+        {% if mensaje_exito %}
+        <p class="contact__success" style="display:block;text-align:center;margin-top:1rem;">{{ mensaje_exito }}</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

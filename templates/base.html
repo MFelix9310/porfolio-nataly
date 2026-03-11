@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Nathaly Buenaño — Content Manager{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Portfolio profesional de Nathaly Buenaño. Content Manager & Estrategia Digital. Gestión de redes sociales, SEO, Meta Ads y coordinación de contenido.{% endblock %}">
+    <meta property="og:title" content="Nathaly Buenaño — Content Manager">
+    <meta property="og:description" content="Content Manager & Estrategia Digital. Gestión de redes sociales, campañas y coordinación de contenido.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Nav -->
+    <nav class="nav" id="nav">
+        <div class="nav__container">
+            <a href="{% url 'core:home' %}" class="nav__logo">NB.</a>
+            <button class="nav__toggle" id="navToggle" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav__links" id="navLinks">
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#reels">Reels</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto" class="nav__cta">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">Nathaly Buenaño · {{ year|default:"2026" }} · Hecho con dedicación desde Riobamba, Ecuador</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

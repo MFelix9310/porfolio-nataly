@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static core_filters %}
+
+{% block title %}{{ proyecto.titulo }} — Nathaly Buenaño{% endblock %}
+{% block meta_description %}{{ proyecto.descripcion|truncatewords:30 }}{% endblock %}
+
+{% block content %}
+<section class="proyecto-detalle section">
+    <div class="container">
+        <a href="{% url 'core:home' %}#portfolio" class="proyecto-detalle__back">&larr; Volver al portfolio</a>
+
+        <div class="proyecto-detalle__header fade-up">
+            <span class="portfolio-card__category">{{ proyecto.categoria }}</span>
+            <h1 class="proyecto-detalle__title">{{ proyecto.titulo }}</h1>
+            <div class="proyecto-detalle__meta">
+                <span>{{ proyecto.cliente }}</span>
+                <span>·</span>
+                <span>{{ proyecto.fecha|date:"F Y" }}</span>
+            </div>
+        </div>
+
+        <div class="proyecto-detalle__image fade-up">
+            {% if proyecto.get_imagen_url|is_video %}
+            <video src="{{ proyecto.get_imagen_url }}" controls muted loop playsinline style="width:100%;border-radius:var(--radius);"></video>
+            {% else %}
+            <img src="{{ proyecto.get_imagen_url }}" alt="{{ proyecto.titulo }}" loading="lazy">
+            {% endif %}
+        </div>
+
+        <div class="proyecto-detalle__content fade-up">
+            <p>{{ proyecto.descripcion }}</p>
+            {% if proyecto.descripcion_larga %}
+            <div class="proyecto-detalle__long">
+                {{ proyecto.descripcion_larga|linebreaks }}
+            </div>
+            {% endif %}
+
+            {% if proyecto.tags %}
+            <div class="proyecto-detalle__tags">
+                {% for tag in proyecto.tags|split_tags %}
+                <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% if proyecto.get_imagen_extra_url %}
+        <div class="proyecto-detalle__extra fade-up">
+            <img src="{{ proyecto.get_imagen_extra_url }}" alt="{{ proyecto.titulo }} - imagen adicional" loading="lazy">
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
