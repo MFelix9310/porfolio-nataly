@@ -288,6 +288,20 @@ class Command(BaseCommand):
                 'destacado': False,
                 'orden': 18,
             },
+            {
+                'titulo': 'Post Instagram - Alitas Mubu',
+                'slug': 'mubu-restaurante-alitas',
+                'descripcion': 'Fotografia de producto para Mubu Restaurante. Alitas crocantes con salsa verde, imagen profesional para el feed de Instagram.',
+                'descripcion_larga': 'Fotografia profesional de producto para el feed de Instagram de Mubu. Alitas crocantes acompanadas de salsa verde y papas fritas. Imagen disenada para generar apetito y engagement en redes sociales.',
+                'imagen_estatica': 'img/mubu_img3.png',
+                'imagen_extra_estatica': 'img/mubu_img4.png',
+                'categoria': 'Instagram',
+                'tags': 'Fotografia, Restaurante, Comida, Redes Sociales',
+                'cliente': 'Mubu Restaurante',
+                'fecha': date(2025, 2, 20),
+                'destacado': False,
+                'orden': 19,
+            },
         ]
         for p in proyectos:
             Proyecto.objects.update_or_create(slug=p['slug'], defaults=p)
