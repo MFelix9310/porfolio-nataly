@@ -247,6 +247,20 @@ class Command(BaseCommand):
                 'url_reel': '',
                 'orden': 15,
             },
+            {
+                'titulo': 'Reel - Mubu Restaurante',
+                'slug': 'mubu-restaurante-reel',
+                'descripcion': 'Reel promocional para Mubu, restaurante de comida rapida con tradicion. Contenido dinamico para Instagram.',
+                'descripcion_larga': 'Reel creado para Mubu, uno de los restaurantes de comida rapida mas antiguos. Contenido audiovisual dinamico para promocionar la marca y sus productos en Instagram.',
+                'imagen_estatica': 'img/reel_mubu.mp4',
+                'categoria': 'Reel',
+                'tags': 'Reel, Restaurante, Comida Rapida, Instagram, CapCut',
+                'cliente': 'Mubu Restaurante',
+                'fecha': date(2025, 3, 15),
+                'destacado': False,
+                'url_reel': '',
+                'orden': 16,
+            },
         ]
         for p in proyectos:
             Proyecto.objects.update_or_create(slug=p['slug'], defaults=p)
