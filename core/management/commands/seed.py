@@ -302,6 +302,20 @@ class Command(BaseCommand):
                 'destacado': False,
                 'orden': 19,
             },
+            {
+                'titulo': 'Reel - Mony',
+                'slug': 'mony-reel',
+                'descripcion': 'Reel promocional para Mony. Contenido audiovisual dinamico para Instagram.',
+                'descripcion_larga': 'Reel creado para Mony. Contenido audiovisual creativo y dinamico para promocionar la marca en Instagram.',
+                'imagen_estatica': 'img/reel_mony.mp4',
+                'categoria': 'Reel',
+                'tags': 'Reel, Instagram, CapCut, Contenido',
+                'cliente': 'Mony',
+                'fecha': date(2025, 2, 10),
+                'destacado': False,
+                'url_reel': '',
+                'orden': 20,
+            },
         ]
         for p in proyectos:
             Proyecto.objects.update_or_create(slug=p['slug'], defaults=p)
