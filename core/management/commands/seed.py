@@ -369,6 +369,9 @@ class Command(BaseCommand):
                 'orden': 24,
             },
         ]
+        # Borrar proyectos obsoletos
+        Proyecto.objects.filter(slug='mony-reel').delete()
+
         for p in proyectos:
             Proyecto.objects.update_or_create(slug=p['slug'], defaults=p)
         self.stdout.write(self.style.SUCCESS(f'{len(proyectos)} proyectos cargados'))
