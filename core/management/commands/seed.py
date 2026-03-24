@@ -261,6 +261,32 @@ class Command(BaseCommand):
                 'url_reel': '',
                 'orden': 16,
             },
+            {
+                'titulo': 'Post Instagram - Mubu Restaurante',
+                'slug': 'mubu-restaurante-post',
+                'descripcion': 'Post para Mubu Restaurante promocionando alitas y strips de pollo. Fotografia de producto con estetica profesional.',
+                'descripcion_larga': 'Tienes ganas de algo super crunch? Pruebas nuestras alitas o strips de pollo estan MUyBUenos. Post disenado para el feed de Instagram de Mubu, restaurante de amigos, picaditas y cafe en Riobamba. Fotografia de producto con enfoque en la textura y presentacion del plato.',
+                'imagen_estatica': 'img/mubu_img1.png',
+                'categoria': 'Instagram',
+                'tags': 'Fotografia, Restaurante, Comida, Redes Sociales',
+                'cliente': 'Mubu Restaurante',
+                'fecha': date(2025, 3, 10),
+                'destacado': False,
+                'orden': 17,
+            },
+            {
+                'titulo': 'Gestion de Instagram - Mubu Restaurante',
+                'slug': 'mubu-restaurante-instagram',
+                'descripcion': 'Gestion integral del perfil de Instagram @mu_.bu: estrategia de contenido, fotografia de producto, copywriting y crecimiento organico.',
+                'descripcion_larga': 'Manejo completo de la cuenta de Instagram de Mubu, restaurante de amigos, picaditas y cafe en Riobamba. Incluye planificacion de contenido, fotografia de producto, diseno de piezas graficas, redaccion de copys, promociones y analisis de metricas. Av. Pedro Vicente Maldonado y Antonio Elizalde, Riobamba.',
+                'imagen_estatica': 'img/mubu_instagram.png',
+                'categoria': 'Redes Sociales',
+                'tags': 'Instagram, Community Management, Fotografia, Restaurante',
+                'cliente': 'Mubu Restaurante',
+                'fecha': date(2025, 3, 1),
+                'destacado': False,
+                'orden': 18,
+            },
         ]
         for p in proyectos:
             Proyecto.objects.update_or_create(slug=p['slug'], defaults=p)
