@@ -267,6 +267,7 @@ class Command(BaseCommand):
                 'descripcion': 'Post para Mubu Restaurante promocionando alitas y strips de pollo. Fotografia de producto con estetica profesional.',
                 'descripcion_larga': 'Tienes ganas de algo super crunch? Pruebas nuestras alitas o strips de pollo estan MUyBUenos. Post disenado para el feed de Instagram de Mubu, restaurante de amigos, picaditas y cafe en Riobamba. Fotografia de producto con enfoque en la textura y presentacion del plato.',
                 'imagen_estatica': 'img/mubu_img1.png',
+                'imagen_extra_estatica': 'img/mubu_img2.png',
                 'categoria': 'Instagram',
                 'tags': 'Fotografia, Restaurante, Comida, Redes Sociales',
                 'cliente': 'Mubu Restaurante',
